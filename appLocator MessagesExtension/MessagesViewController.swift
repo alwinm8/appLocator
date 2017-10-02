@@ -32,7 +32,8 @@ class CompactViewController: UIViewController
         
         let appleLongitude : String = String(format:"%f", currentLongitude)
         let appleLatitude : String = String(format:"%f", currentLatitude)
-        messageLocationAddress = "http://maps.apple.com/?ll=5" + appleLatitude + "," + appleLongitude
+        messageLocationAddress = "http://maps.apple.com/?ll=" + appleLatitude + "," + appleLongitude + "&q=Location"
+        print(messageLocationAddress)
         delegate?.composeMessage()
     }
     
@@ -40,7 +41,8 @@ class CompactViewController: UIViewController
     {
         let wazeLongitude : String = String(format:"%f", currentLongitude)
         let wazeLatitude : String = String(format:"%f", currentLatitude)
-        messageLocationAddress = "https://waze.com/ul?ll=" + wazeLatitude + "&" + wazeLongitude
+        messageLocationAddress = "https://waze.com/ul?ll=" + wazeLatitude + "," + wazeLongitude
+        print(messageLocationAddress)
         delegate?.composeMessage()
     }
     
@@ -48,6 +50,7 @@ class CompactViewController: UIViewController
         let googleLongitude : String = String(format:"%f", currentLongitude)
         let googleLatitude : String = String(format:"%f", currentLatitude)
         messageLocationAddress = "http://maps.google.com/maps?q=" + googleLatitude + "," + googleLongitude
+        print(messageLocationAddress)
         delegate?.composeMessage()
     }
     
@@ -115,7 +118,6 @@ class  MessagesViewController: MSMessagesAppViewController, CLLocationManagerDel
         {
             locationManager.startUpdatingLocation()
         }
-        print(currentLatitude, ", ", currentLongitude)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
@@ -131,7 +133,6 @@ class  MessagesViewController: MSMessagesAppViewController, CLLocationManagerDel
         
         currentLatitude = userLocation.coordinate.latitude
         currentLongitude = userLocation.coordinate.longitude
-        print(currentLatitude, ", ", currentLongitude)
     }
     
     
